@@ -4,9 +4,12 @@
 This is a simple game based on the hit game Flappy Bird. The goal of the game is to simply avoid obstacles.
 
 ## Installation
-1. Clone this repository
-2. Install pygame using ``pip install pygame``
-3. Run ``python  Main.py``
+1. Clone this repository.
+2. Install pygame using `pip install pygame`.
+3. Run `python Main.py`.
+
+## Play the Game
+[![Play on itch.io](https://i.imgur.com/dD97spb.png)](https://cptz.itch.io/mananangal-flight)
 
 ## Releases
 For the latest updates and releases, visit the [Releases](https://github.com/CptZee/Mananangal-Fly/releases) page.
