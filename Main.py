@@ -82,7 +82,7 @@ def ObstaclePair() :
     obstacles.append(Obstacle("UP", 900, 600-(r+125)))
     global score
     score += 1
-    if score > 0:
+    if score > -1:
         point_sound.play()
 
 def AnimateRoof() :
@@ -122,7 +122,7 @@ def RunGame():
         if started != True :
             DisplayIndicator(["Press 'space bar' or 'click' to start the game",
               "Press 'esc' to exit the game"], -100)
-        if score >= -1:         
+        if score == 0:         
             music.play(loops=-1)
             music.set_volume(0.2)
         else:
