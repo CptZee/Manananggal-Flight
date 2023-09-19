@@ -70,6 +70,9 @@ def main():
 
     pygame.display.set_icon(icon_image)
 
+    music.play(loops=-1)
+    music.set_volume(0.2)
+
     RestartGame()
     while run:
         RunGame()
@@ -82,7 +85,7 @@ def ObstaclePair() :
     obstacles.append(Obstacle("UP", 900, 600-(r+125)))
     global score
     score += 1
-    if score > -1:
+    if score > 0:
         point_sound.play()
 
 def AnimateRoof() :
@@ -122,11 +125,6 @@ def RunGame():
         if started != True :
             DisplayIndicator(["Press 'space bar' or 'click' to start the game",
               "Press 'esc' to exit the game"], -100)
-        if score == 0:         
-            music.play(loops=-1)
-            music.set_volume(0.2)
-        else:
-            music.stop()
         if score >= 0:
             DisplayIndicator(["Score: " + str(score),
                             "Highscore: " + str(highscore)], 220)
