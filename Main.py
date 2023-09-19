@@ -56,7 +56,10 @@ def main():
 
     pygame.display.set_icon(icon_image)
 
-    RunGame()
+    RestartGame()
+    while run:
+        RunGame()
+    
     pygame.quit()
 
 def Die() :
@@ -75,7 +78,7 @@ def AnimateRoof() :
     win.blit(roof_img, ((runs%111)*-7, 500))
 
 def RunGame():
-    global run, runs, started
+    global run, runs, started, restart_timer
     while run:
         pygame.time.delay(5)
         for event in pygame.event.get() :
@@ -106,8 +109,24 @@ def RunGame():
             win.blit(scoreboard, (10, 0))
         pygame.display.update()
         clock.tick(FPS)
+        if dead:
+            RestartGame()
         if not dead:
             runs += 1
+
+def RestartGame():
+    global dead, started, runs, score, obstacles, restart_timer
+
+    dead = False
+    started = False
+    runs = 0
+    score = -2
+    restart_timer = 0
+    obstacles.clear()
+
+    Mananangal.x = 250
+    Mananangal.y = 250
+    Mananangal.vel = 0
 
 ##
 ##  Different classes
