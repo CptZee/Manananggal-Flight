@@ -20,7 +20,6 @@
 
 import pygame, math, os, webbrowser
 from random import randint
-from time import sleep
 
 def main():
     global FPS, gravity, clock, dead, score, run, started, runs, obstacles, mananangal, mananangal_img
