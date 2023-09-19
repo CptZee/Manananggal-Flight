@@ -25,7 +25,7 @@ from time import sleep
 def main():
     global FPS, gravity, clock, dead, score, run, started, runs, obstacles, mananangal, mananangal_img
     global obstacle_img, win, roof_img, timer_font, indicator_font, bg_img, screen_width, screen_height 
-    global highscore
+    global highscore, github_url, github_logo, logo_x, logo_y, logo_width, logo_height
 
     pygame.init()
 
@@ -47,8 +47,14 @@ def main():
     bg_img = pygame.image.load(os.path.join(script_dir, 'background.png'))
     obstacle_img = pygame.image.load(os.path.join(script_dir, 'obstacle.png'))
     roof_img = pygame.image.load(os.path.join(script_dir, 'roof.png'))
+    github_logo = pygame.image.load(os.path.join(script_dir, 'Github.png'))
     timer_font = pygame.font.SysFont('Comic Sans MS', 30)
     indicator_font = pygame.font.SysFont('Comic Sans MS', 30)
+    github_url = "https://github.com/CptZee/Mananangal-Fly"
+    logo_width, logo_height = github_logo.get_rect().size
+    logo_x = screen_width - logo_width - 10
+    logo_y = screen_height - logo_height - 10
+    
 
 
     #Set the values for the mananangal
@@ -98,6 +104,10 @@ def RunGame():
                         Mananangal.jump()
             elif event.type == pygame.QUIT :
                 run = False
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_x, mouse_y = pygame.mouse.get_pos()
+                if logo_x <= mouse_x <= logo_x + logo_width and logo_y <= mouse_y <= logo_y + logo_height:
+                    webbrowser.open('https://github.com/CptZee/Mananangal-Fly')
 
         win.blit(bg_img, (0, 0))
         if runs % 45 == 0 and started :
@@ -119,6 +129,7 @@ def RunGame():
         win.blit(mananangal, (Mananangal.x,Mananangal.y))
         AnimateRoof()
 
+        win.blit(github_logo, (logo_x, logo_y))
         pygame.display.update()
         clock.tick(FPS)
         highscore = max(score, highscore)
