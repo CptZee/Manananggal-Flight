@@ -101,10 +101,13 @@ def RunGame():
 
         win.blit(bg_img, (0, 0))
         if started != True :
-            text_lines = ["Press 'space bar' to start the game",
-              "Press 'esc' to exit the game",
-              "High Score: " + str(highscore)]
-            DisplayIndicator(text_lines)
+            DisplayIndicator(["Press 'space bar' to start the game",
+              "Press 'esc' to exit the game"], 100)
+        if score >= 0:
+            DisplayIndicator(["Score: " + str(score),
+                            "Highscore: " + str(highscore)], 160)
+        else: 
+            DisplayIndicator(["Highscore: " + str(highscore)], 160)
         if runs % 45 == 0 and started :
             ObstaclePair()
         for o in obstacles :
@@ -114,10 +117,6 @@ def RunGame():
         win.blit(mananangal, (Mananangal.x,Mananangal.y))
         AnimateRoof()
 
-        scoreboard = timer_font.render(str(score), False, (0, 0, 0))
-        if score > -1 :
-            scorebase = pygame.draw.rect(win, (255, 255, 255), (7, 5, len(str(score))*15+10, 35))
-            win.blit(scoreboard, (10, 0))
         pygame.display.update()
         clock.tick(FPS)
         highscore = max(score, highscore)
@@ -126,8 +125,8 @@ def RunGame():
         if not dead:
             runs += 1
 
-def DisplayIndicator(text_lines):
-    y_offset = (screen_height // 2 - len(text_lines) * indicator_font.get_linesize() // 2) - 150
+def DisplayIndicator(text_lines, y_adjustment):
+    y_offset = (screen_height // 2 - len(text_lines) * indicator_font.get_linesize() // 2) - y_adjustment
     
     for line in text_lines:
         text_surface = indicator_font.render(line, True, (255, 255, 255))
