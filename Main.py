@@ -74,11 +74,6 @@ def main():
     
     pygame.quit()
 
-def Die() :
-    global dead
-    dead = True
-    run = False
-
 def ObstaclePair() :
     r = randint(75, 350)
     obstacles.append(Obstacle("DOWN", 900, r))
@@ -178,7 +173,8 @@ class Mananangal :
                 Mananangal.vel += gravity
             else :
                 Mananangal.y = 475
-                Die()
+                global dead
+                dead = True
             if Mananangal.y < 0 :
                 Mananangal.y = 0
                 Mananangal.vel = 0
@@ -208,13 +204,14 @@ class Obstacle() :
             self.x -= 7
 
     def checkCollide(self) :
+        global dead
         if self.dir == "DOWN" :
             if Mananangal.x + 48 > self.x and self.x + 75 > Mananangal.x :
                 if Mananangal.y + 2 < self.len :
-                    Die()
+                    dead = True
         else :
             if Mananangal.x + 48 > self.x and self.x + 75 > Mananangal.x :
                 if Mananangal.y + 45 > 600-self.len :
-                    Die()
+                    dead = True
 
 main()
