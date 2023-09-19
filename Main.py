@@ -18,7 +18,7 @@
 # DEALINGS IN THE SOFTWARE.
 # ------------------------------------------------------------------------------------------
 
-import pygame, math, os, sys
+import pygame, math, os, webbrowser
 from random import randint
 from time import sleep
 
@@ -100,19 +100,21 @@ def RunGame():
                 run = False
 
         win.blit(bg_img, (0, 0))
-        if started != True :
-            DisplayIndicator(["Press 'space bar' to start the game",
-              "Press 'esc' to exit the game"], 100)
-        if score >= 0:
-            DisplayIndicator(["Score: " + str(score),
-                            "Highscore: " + str(highscore)], 160)
-        else: 
-            DisplayIndicator(["Highscore: " + str(highscore)], 160)
         if runs % 45 == 0 and started :
             ObstaclePair()
         for o in obstacles :
             o.update()
             o.checkCollide()
+
+        if started != True :
+            DisplayIndicator(["Press 'space bar' to start the game",
+              "Press 'esc' to exit the game"], 100)
+        if score >= 0:
+            DisplayIndicator(["Score: " + str(score),
+                            "Highscore: " + str(highscore)], 220)
+        else: 
+            DisplayIndicator(["Highscore: " + str(highscore)], 170)
+        
         Mananangal.update()
         win.blit(mananangal, (Mananangal.x,Mananangal.y))
         AnimateRoof()
