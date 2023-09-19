@@ -1,4 +1,4 @@
-# Contributing to Mananangal Fly
+# Contributing to Mananangal Flight: Urban Skies Adventure
 
 Thank you for your interest in contributing to Byahe! We value your effort and aim to make the contribution process straightforward and meaningful.
 
