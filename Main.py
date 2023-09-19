@@ -18,8 +18,18 @@
 # DEALINGS IN THE SOFTWARE.
 # ------------------------------------------------------------------------------------------
 
-import pygame, math, os, webbrowser
+import pygame, math, os, webbrowser, pygame.font
 from random import randint
+
+
+
+pygame.init()
+
+current_directory = os.path.dirname(__file__)
+
+font_file = 'ScaryPumpkin-Rpwx3.ttf'
+font_path = os.path.join(current_directory, 'Assets', font_file)
+spooky_font = pygame.font.Font(font_path, 30)
 
 def main():
     global FPS, gravity, clock, dead, score, run, started, runs, obstacles, manananggal, manananggal_img
@@ -90,7 +100,7 @@ def AnimateRoof() :
 
 def RunGame():
     global run, runs, started, restart_timer, score, highscore
-    while run:
+    while run: 
         pygame.time.delay(5)
         for event in pygame.event.get() :
             if event.type == pygame.KEYDOWN :
@@ -119,16 +129,25 @@ def RunGame():
             o.update()
             o.checkCollide()
 
-        if started != True :
-            DisplayIndicator(["Press 'space bar' or 'click' to start the game",
-              "Press 'esc' to exit the game"], -100)
+        if started != True:
+            background_rect = pygame.Surface((screen_width, screen_height), pygame.SRCALPHA)
+            background_color = (0, 0, 0, 150)
+            pygame.draw.rect(background_rect, background_color, (0, 0, screen_width, screen_height))
+
+            win.blit(background_rect, (0, 0))
+
+            text_lines = ["Press 'space bar' or 'click' to start the game",
+                        "Press 'esc' to exit the game"]
+            DisplayIndicator(text_lines, -100, spooky_font, "#880808")
         if score >= 0:
-            DisplayIndicator(["Score: " + str(score),
-                            "Highscore: " + str(highscore)], 220)
-        else: 
-            DisplayIndicator(["Mananangal Flight",
-                              "Highscore: " + str(highscore)], 180)
-           
+            text_lines = ["Score: " + str(score),
+                        "Highscore: " + str(highscore)]
+            DisplayIndicator(text_lines, 220, spooky_font, "#880808")  
+        else:
+            text_lines = ["Mananangal Flight",
+                        "Highscore: " + str(highscore)]
+            DisplayIndicator(text_lines, 180, spooky_font, "#880808")  
+
         
         Manananggal.update()
         win.blit(manananggal, (Manananggal.x,Manananggal.y))
@@ -144,14 +163,14 @@ def RunGame():
         if not dead:
             runs += 1
 
-def DisplayIndicator(text_lines, y_adjustment):
-    y_offset = (screen_height // 2 - len(text_lines) * indicator_font.get_linesize() // 2) - y_adjustment
+def DisplayIndicator(text_lines, y_adjustment, font, text_color):
+    y_offset = (screen_height // 2 - len(text_lines) * font.get_linesize() // 2) - y_adjustment
     
     for line in text_lines:
-        text_surface = indicator_font.render(line, True, (255, 255, 255))
+        text_surface = font.render(line, True, pygame.Color(text_color))  # Use the provided hex color
         text_rect = text_surface.get_rect(center=(screen_width/2, y_offset))
         win.blit(text_surface, text_rect)
-        y_offset += indicator_font.get_linesize()
+        y_offset += font.get_linesize()
 
 def RestartGame():
     global dead, started, runs, score, obstacles, restart_timer
@@ -163,8 +182,9 @@ def RestartGame():
     restart_timer = 0
     obstacles.clear()
     
-    DisplayIndicator(["Mananangal Flight",
-                        "Highscore: " + str(highscore)], 180)
+    # Use the spooky font for this text
+    text_lines = ["Mananangal Flight", "Highscore: " + str(highscore)]
+    DisplayIndicator(text_lines, 180, spooky_font, "#880808")
 
     Manananggal.x = 250
     Manananggal.y = 250
