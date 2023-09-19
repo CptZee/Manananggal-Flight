@@ -18,6 +18,21 @@
 # DEALINGS IN THE SOFTWARE.
 # ------------------------------------------------------------------------------------------
 
+##
+## Install Pygame
+##
+import importlib
+
+# Try to import pygame
+try:
+    importlib.import_module('pygame')
+except ImportError:
+    print("Pygame is not installed. Installing...")
+    import subprocess
+    subprocess.check_call(['pip', 'install', 'pygame'])
+    print("Pygame has been successfully installed.")
+    importlib.import_module('pygame')
+
 import pygame, math, os, webbrowser
 from random import randint
 
