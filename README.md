@@ -8,6 +8,9 @@ This is a simple game based on the hit game Flappy Bird. The goal of the game is
 2. Install pygame using ``pip install pygame``
 3. Run ``python  Main.py``
 
+## Releases
+For the latest updates and releases, visit the [Releases](https://github.com/CptZee/Mananangal-Fly/releases) page.
+
 ## Contributing
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
