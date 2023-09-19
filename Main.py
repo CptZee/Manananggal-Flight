@@ -22,8 +22,8 @@ import pygame, math, os, webbrowser
 from random import randint
 
 def main():
-    global FPS, gravity, clock, dead, score, run, started, runs, obstacles, mananangal, mananangal_img
-    global obstacle_img, win, roof_img, timer_font, indicator_font, bg_img, screen_width, screen_height 
+    global FPS, gravity, clock, dead, score, run, started, runs, obstacles, manananggal, manananggal_img
+    global obstacle_img, win, roof_img, indicator_font, bg_img, screen_width, screen_height 
     global highscore, github_url, github_logo, logo_x, logo_y, logo_width, logo_height
 
     pygame.init()
@@ -39,16 +39,15 @@ def main():
     obstacles = []
     screen_width, screen_height = 800, 600
     win = pygame.display.set_mode((screen_width, screen_height))
-    pygame.display.set_caption("Mananangal Flying Game!")
+    pygame.display.set_caption("Manananggal Flight: Urban Skies Adventure")
     clock = pygame.time.Clock()
     script_dir = os.path.dirname(__file__)
-    mananangal_img = pygame.image.load(os.path.join(script_dir, 'mananangal.png'))
+    manananggal_img = pygame.image.load(os.path.join(script_dir, 'manananggal.png'))
     bg_img = pygame.image.load(os.path.join(script_dir, 'background.png'))
     obstacle_img = pygame.image.load(os.path.join(script_dir, 'obstacle.png'))
     roof_img = pygame.image.load(os.path.join(script_dir, 'roof.png'))
     github_logo = pygame.image.load(os.path.join(script_dir, 'Github.png'))
-    timer_font = pygame.font.SysFont('Comic Sans MS', 30)
-    indicator_font = pygame.font.SysFont('Comic Sans MS', 30)
+    indicator_font = pygame.font.SysFont('Comic Sans', 30)
     github_url = "https://github.com/CptZee/Mananangal-Fly"
     logo_width, logo_height = github_logo.get_rect().size
     logo_x = screen_width - logo_width - 10
@@ -57,10 +56,10 @@ def main():
 
 
     #Set the values for the mananangal
-    mananangal = Mananangal()
-    mananangal.x = 250
-    mananangal.y = 250
-    mananangal.vel = 0
+    manananggal = Manananggal()
+    manananggal.x = 250
+    manananggal.y = 250
+    manananggal.vel = 0
 
     icon_path = os.path.join(script_dir, 'icon.png')
     icon_image = pygame.image.load(icon_path)
@@ -95,13 +94,13 @@ def RunGame():
                     if not started :
                         started = True
                     if not dead :
-                        Mananangal.jump()
+                        Manananggal.jump()
             elif event.type == pygame.QUIT :
                 run = False
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_x, mouse_y = pygame.mouse.get_pos()
                 if logo_x <= mouse_x <= logo_x + logo_width and logo_y <= mouse_y <= logo_y + logo_height:
-                    webbrowser.open('https://github.com/CptZee/Mananangal-Fly')
+                    webbrowser.open('https://github.com/CptZee/Manananggal-Fly')
 
         win.blit(bg_img, (0, 0))
         if runs % 45 == 0 and started :
@@ -112,15 +111,16 @@ def RunGame():
 
         if started != True :
             DisplayIndicator(["Press 'space bar' to start the game",
-              "Press 'esc' to exit the game"], 100)
+              "Press 'esc' to exit the game"], -100)
         if score >= 0:
             DisplayIndicator(["Score: " + str(score),
                             "Highscore: " + str(highscore)], 220)
         else: 
-            DisplayIndicator(["Highscore: " + str(highscore)], 170)
+            DisplayIndicator(["Mananangal Flight",
+                              "Highscore: " + str(highscore)], 180)
         
-        Mananangal.update()
-        win.blit(mananangal, (Mananangal.x,Mananangal.y))
+        Manananggal.update()
+        win.blit(manananggal, (Manananggal.x,Manananggal.y))
         AnimateRoof()
 
         win.blit(github_logo, (logo_x, logo_y))
@@ -151,42 +151,42 @@ def RestartGame():
     restart_timer = 0
     obstacles.clear()
 
-    Mananangal.x = 250
-    Mananangal.y = 250
-    Mananangal.vel = 0
+    Manananggal.x = 250
+    Manananggal.y = 250
+    Manananggal.vel = 0
 
 ##
 ##  Different classes
 ##  TODO: Migrate them to their own .py file
 ##
 
-class Mananangal :
+class Manananggal :
     x = 250
     y = 250
     vel = 0
 
     def update() :
         if started :
-            if Mananangal.y < 475 :
-                Mananangal.y += Mananangal.vel
-                Mananangal.vel += gravity
+            if Manananggal.y < 475 :
+                Manananggal.y += Manananggal.vel
+                Manananggal.vel += gravity
             else :
-                Mananangal.y = 475
+                Manananggal.y = 475
                 global dead
                 dead = True
-            if Mananangal.y < 0 :
-                Mananangal.y = 0
-                Mananangal.vel = 0
+            if Manananggal.y < 0 :
+                Manananggal.y = 0
+                Manananggal.vel = 0
         else :
-            Mananangal.y = 250 + math.sin(runs/10)*15
-        Mananangal.getAngle()
+            Manananggal.y = 250 + math.sin(runs/10)*15
+        Manananggal.getAngle()
 
     def jump() :
-        Mananangal.vel = -10
+        Manananggal.vel = -10
 
     def getAngle() :
-        global mananangal
-        mananangal = pygame.transform.rotate(mananangal_img, -3*Mananangal.vel)
+        global manananggal
+        manananggal = pygame.transform.rotate(manananggal_img, -3*Manananggal.vel)
 
 class Obstacle() :
     def __init__(self, dir, x, len) :
@@ -205,12 +205,12 @@ class Obstacle() :
     def checkCollide(self) :
         global dead
         if self.dir == "DOWN" :
-            if Mananangal.x + 48 > self.x and self.x + 75 > Mananangal.x :
+            if Manananggal.x + 48 > self.x and self.x + 75 > Manananggal.x :
                 if Mananangal.y + 2 < self.len :
                     dead = True
         else :
-            if Mananangal.x + 48 > self.x and self.x + 75 > Mananangal.x :
-                if Mananangal.y + 45 > 600-self.len :
+            if Manananggal.x + 48 > self.x and self.x + 75 > Manananggal.x :
+                if Manananggal.y + 45 > 600-self.len :
                     dead = True
 
 main()
