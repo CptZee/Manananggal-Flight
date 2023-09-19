@@ -101,6 +101,10 @@ def RunGame():
                 mouse_x, mouse_y = pygame.mouse.get_pos()
                 if logo_x <= mouse_x <= logo_x + logo_width and logo_y <= mouse_y <= logo_y + logo_height:
                     webbrowser.open('https://github.com/CptZee/Manananggal-Fly')
+                if not started :
+                    started = True
+                if not dead :
+                    Manananggal.jump()
 
         win.blit(bg_img, (0, 0))
         if runs % 45 == 0 and started :
@@ -110,7 +114,7 @@ def RunGame():
             o.checkCollide()
 
         if started != True :
-            DisplayIndicator(["Press 'space bar' to start the game",
+            DisplayIndicator(["Press 'space bar' or 'click' to start the game",
               "Press 'esc' to exit the game"], -100)
         if score >= 0:
             DisplayIndicator(["Score: " + str(score),
