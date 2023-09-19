@@ -43,29 +43,27 @@ def main():
     pygame.display.set_caption("Manananggal Flight: Urban Skies Adventure")
     clock = pygame.time.Clock()
     script_dir = os.path.dirname(__file__)
-    manananggal_img = pygame.image.load(os.path.join(script_dir, 'manananggal.png'))
-    bg_img = pygame.image.load(os.path.join(script_dir, 'background.png'))
-    obstacle_img = pygame.image.load(os.path.join(script_dir, 'obstacle.png'))
-    roof_img = pygame.image.load(os.path.join(script_dir, 'roof.png'))
-    github_logo = pygame.image.load(os.path.join(script_dir, 'Github.png'))
-    point_sound = pygame.mixer.Sound(os.path.join(script_dir, 'point.wav'))
-    game_over_sound = pygame.mixer.Sound(os.path.join(script_dir, 'game_over.wav'))
-    music = pygame.mixer.Sound(os.path.join(script_dir, 'music.wav'))
+    manananggal_img = pygame.image.load(os.path.join(script_dir + "/Assets", 'manananggal.png'))
+    bg_img = pygame.image.load(os.path.join(script_dir + "/Assets", 'background.png'))
+    obstacle_img = pygame.image.load(os.path.join(script_dir + "/Assets", 'obstacle.png'))
+    roof_img = pygame.image.load(os.path.join(script_dir + "/Assets", 'roof.png'))
+    github_logo = pygame.image.load(os.path.join(script_dir + "/Assets", 'Github.png'))
+    point_sound = pygame.mixer.Sound(os.path.join(script_dir + "/Assets", 'point.wav'))
+    game_over_sound = pygame.mixer.Sound(os.path.join(script_dir + "/Assets", 'game_over.wav'))
+    music = pygame.mixer.Sound(os.path.join(script_dir + "/Assets", 'music.wav'))
+    icon_path = os.path.join(script_dir + "/Assets", 'icon.png')
     indicator_font = pygame.font.SysFont('Comic Sans', 30)
     github_url = "https://github.com/CptZee/Mananangal-Fly"
     logo_width, logo_height = github_logo.get_rect().size
     logo_x = screen_width - logo_width - 10
     logo_y = screen_height - logo_height - 10
     
-
-
     #Set the values for the mananangal
     manananggal = Manananggal()
     manananggal.x = 250
     manananggal.y = 250
     manananggal.vel = 0
 
-    icon_path = os.path.join(script_dir, 'icon.png')
     icon_image = pygame.image.load(icon_path)
 
     pygame.display.set_icon(icon_image)
