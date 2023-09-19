@@ -1,4 +1,5 @@
 # Welcome to Mananangal Flight: Urban Skies Adventure
+![Preview](https://i.imgur.com/xOakABg.gif)
 ## Introduction
 This is a simple game based on the hit game Flappy Bird. The goal of the game is to simply avoid obstacles.
 
