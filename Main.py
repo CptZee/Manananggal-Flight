@@ -42,7 +42,6 @@ def main():
     win = pygame.display.set_mode((screen_width, screen_height))
     pygame.display.set_caption("Manananggal Flight: Urban Skies Adventure")
     clock = pygame.time.Clock()
-    pygame.mixer.init()
     manananggal_img = pygame.image.load(os.path.join("Assets", 'manananggal.png'))
     bg_img = pygame.image.load(os.path.join("Assets", 'background.png'))
     obstacle_img = pygame.image.load(os.path.join("Assets", 'obstacle.png'))
