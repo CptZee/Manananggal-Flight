@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - name: Checkout code
@@ -19,15 +19,14 @@ jobs:
         python-version: 3.11
 
     - name: Install dependencies
-      run: pip install pygame pyinstaller
+      run: pip install pygame pyinstaller Pillow 
 
     - name: Compile Python script and move assets
       run: |
-        pyinstaller --name Main --onefile Main.py
-        mv dist/Main dist/Main.py
+        pyinstaller Main.py --noconsole --name "Manananggal Flight" --icon "Assets/icon.png" --add-data "Assets;Assets" 
         
     - name: Archive artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: CompiledFiles
-        path: dist/
+        name: ManananggalFlight
+        path: D:\a\Manananggal-Flight\Manananggal-Flight\build\Manananggal Flight

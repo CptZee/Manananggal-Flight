@@ -116,7 +116,7 @@ def RunGame():
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_x, mouse_y = pygame.mouse.get_pos()
                 if logo_x <= mouse_x <= logo_x + logo_width and logo_y <= mouse_y <= logo_y + logo_height:
-                    webbrowser.open('https://github.com/CptZee/Manananggal-Fly')
+                    webbrowser.open('https://github.com/CptZee/Manananggal-Flight')
                 if not started :
                     started = True
                 if not dead :
