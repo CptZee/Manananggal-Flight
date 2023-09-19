@@ -18,12 +18,13 @@
 # DEALINGS IN THE SOFTWARE.
 # ------------------------------------------------------------------------------------------
 
-import pygame, math, os
+import pygame, math, os, sys
 from random import randint
 from time import sleep
 
 def main():
-    global FPS, gravity, clock, dead, score, run, started, runs, obstacles, mananangal, mananangal_img, obstacle_img, win, roof_img, font, bg_img
+    global FPS, gravity, clock, dead, score, run, started, runs, obstacles, mananangal, mananangal_img
+    global obstacle_img, win, roof_img, timer_font, indicator_font, bg_img, screen_width, screen_height 
 
     pygame.init()
 
@@ -35,7 +36,8 @@ def main():
     started = False
     runs = 0
     obstacles = []
-    win = pygame.display.set_mode((800, 600))
+    screen_width, screen_height = 800, 600
+    win = pygame.display.set_mode((screen_width, screen_height))
     pygame.display.set_caption("Mananangal Flying Game!")
     clock = pygame.time.Clock()
     script_dir = os.path.dirname(__file__)
@@ -43,7 +45,9 @@ def main():
     bg_img = pygame.image.load(os.path.join(script_dir, 'background.png'))
     obstacle_img = pygame.image.load(os.path.join(script_dir, 'obstacle.png'))
     roof_img = pygame.image.load(os.path.join(script_dir, 'roof.png'))
-    font = pygame.font.SysFont('Comic Sans MS', 30)
+    timer_font = pygame.font.SysFont('Comic Sans MS', 30)
+    indicator_font = pygame.font.SysFont('Comic Sans MS', 30)
+
 
     #Set the values for the mananangal
     mananangal = Mananangal()
@@ -94,6 +98,8 @@ def RunGame():
                 run = False
 
         win.blit(bg_img, (0, 0))
+        if started != True :
+            DisplayIndicator("Press 'space bar' to start the game")
         if runs % 45 == 0 and started :
             ObstaclePair()
         for o in obstacles :
@@ -103,7 +109,7 @@ def RunGame():
         win.blit(mananangal, (Mananangal.x,Mananangal.y))
         AnimateRoof()
 
-        scoreboard = font.render(str(score), False, (0, 0, 0))
+        scoreboard = timer_font.render(str(score), False, (0, 0, 0))
         if score > -1 :
             scorebase = pygame.draw.rect(win, (255, 255, 255), (7, 5, len(str(score))*15+10, 35))
             win.blit(scoreboard, (10, 0))
@@ -113,6 +119,11 @@ def RunGame():
             RestartGame()
         if not dead:
             runs += 1
+
+def DisplayIndicator(text):
+    text_surface = indicator_font.render(text, True, (255, 255, 255))
+    text_rect = text_surface.get_rect(center=(screen_width/2, (screen_height/2) + 50))
+    win.blit(text_surface, text_rect)
 
 def RestartGame():
     global dead, started, runs, score, obstacles, restart_timer
