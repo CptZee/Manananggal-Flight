@@ -167,6 +167,9 @@ def RestartGame():
     score = -2
     restart_timer = 0
     obstacles.clear()
+    
+    DisplayIndicator(["Mananangal Flight",
+                        "Highscore: " + str(highscore)], 180)
 
     Manananggal.x = 250
     Manananggal.y = 250
