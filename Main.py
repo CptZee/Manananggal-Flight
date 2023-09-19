@@ -23,8 +23,8 @@ from random import randint
 
 def main():
     global FPS, gravity, clock, dead, score, run, started, runs, obstacles, manananggal, manananggal_img
-    global obstacle_img, win, roof_img, indicator_font, bg_img, screen_width, screen_height 
-    global highscore, github_url, github_logo, logo_x, logo_y, logo_width, logo_height
+    global obstacle_img, win, roof_img, indicator_font, bg_img, screen_width, screen_height, point_sound 
+    global highscore, github_url, github_logo, logo_x, logo_y, logo_width, logo_height, game_over_sound
 
     pygame.init()
 
@@ -47,6 +47,8 @@ def main():
     obstacle_img = pygame.image.load(os.path.join(script_dir, 'obstacle.png'))
     roof_img = pygame.image.load(os.path.join(script_dir, 'roof.png'))
     github_logo = pygame.image.load(os.path.join(script_dir, 'Github.png'))
+    point_sound = pygame.mixer.Sound(os.path.join(script_dir, 'point.wav'))
+    game_over_sound = pygame.mixer.Sound(os.path.join(script_dir, 'game_over.wav'))
     indicator_font = pygame.font.SysFont('Comic Sans', 30)
     github_url = "https://github.com/CptZee/Mananangal-Fly"
     logo_width, logo_height = github_logo.get_rect().size
@@ -78,6 +80,8 @@ def ObstaclePair() :
     obstacles.append(Obstacle("UP", 900, 600-(r+125)))
     global score
     score += 1
+    if score > 0:
+        point_sound.play()
 
 def AnimateRoof() :
     win.blit(roof_img, ((runs%111)*-7, 500))
@@ -132,6 +136,7 @@ def RunGame():
         clock.tick(FPS)
         highscore = max(score, highscore)
         if dead:
+            game_over_sound.play()
             RestartGame()
         if not dead:
             runs += 1
