@@ -4,7 +4,8 @@ This is a simple game based on the hit game Flappy Bird. The goal of the game is
 
 ## Installation
 1. Clone this repository
-2. Run ``python  Main.py``
+2. Install pygame using ``pip install pygame``
+3. Run ``python  Main.py``
 
 ## Contributing
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details.
