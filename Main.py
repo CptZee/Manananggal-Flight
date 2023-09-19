@@ -70,8 +70,6 @@ def main():
 
     pygame.display.set_icon(icon_image)
 
-    music.play(loops=-1)
-
     RestartGame()
     while run:
         RunGame()
@@ -124,12 +122,18 @@ def RunGame():
         if started != True :
             DisplayIndicator(["Press 'space bar' or 'click' to start the game",
               "Press 'esc' to exit the game"], -100)
+        if score >= -1:         
+            music.play(loops=-1)
+            music.set_volume(0.2)
+        else:
+            music.stop()
         if score >= 0:
             DisplayIndicator(["Score: " + str(score),
                             "Highscore: " + str(highscore)], 220)
         else: 
             DisplayIndicator(["Mananangal Flight",
                               "Highscore: " + str(highscore)], 180)
+           
         
         Manananggal.update()
         win.blit(manananggal, (Manananggal.x,Manananggal.y))
