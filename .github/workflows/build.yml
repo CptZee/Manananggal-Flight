@@ -1,4 +1,4 @@
-name: Build and Package
+name: Build (Windows)
 
 on:
   push:
@@ -19,14 +19,14 @@ jobs:
         python-version: 3.11
 
     - name: Install dependencies
-      run: pip install pygame
+      run: pip install pygame pyinstaller
 
     - name: Compile Python script and move assets
       run: |
-        python Main.py
-
+        pyinstaller --onefile Main.py
+        
     - name: Archive artifacts
       uses: actions/upload-artifact@v2
       with:
         name: CompiledFiles
-        path: Assets/
+        path: dist/
