@@ -23,7 +23,8 @@ jobs:
 
     - name: Compile Python script and move assets
       run: |
-        pyinstaller --onefile Main.py
+        pyinstaller --name Main --onefile Main.py
+        mv dist/Main dist/Main.py
         
     - name: Archive artifacts
       uses: actions/upload-artifact@v2
