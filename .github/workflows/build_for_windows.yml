@@ -23,10 +23,10 @@ jobs:
 
     - name: Compile Python script and move assets
       run: |
-        pyinstaller Main.py --add-binary "Assets;Assets" --noconsole --name "Manananggal Flight" --icon "Assets/icon.png"
+        pyinstaller Main.py --noconsole --name "Manananggal Flight" --icon "Assets/icon.png" --add-data "Assets;Assets" 
         
     - name: Archive artifacts
       uses: actions/upload-artifact@v2
       with:
         name: CompiledFiles
-        path: dist/
+        path: dist/Manananggal\ Flight
