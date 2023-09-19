@@ -25,6 +25,7 @@ def main():
     global FPS, gravity, clock, dead, score, run, started, runs, obstacles, manananggal, manananggal_img
     global obstacle_img, win, roof_img, indicator_font, bg_img, screen_width, screen_height, point_sound 
     global highscore, github_url, github_logo, logo_x, logo_y, logo_width, logo_height, game_over_sound
+    global music
 
     pygame.init()
 
@@ -49,6 +50,7 @@ def main():
     github_logo = pygame.image.load(os.path.join(script_dir, 'Github.png'))
     point_sound = pygame.mixer.Sound(os.path.join(script_dir, 'point.wav'))
     game_over_sound = pygame.mixer.Sound(os.path.join(script_dir, 'game_over.wav'))
+    music = pygame.mixer.Sound(os.path.join(script_dir, 'music.wav'))
     indicator_font = pygame.font.SysFont('Comic Sans', 30)
     github_url = "https://github.com/CptZee/Mananangal-Fly"
     logo_width, logo_height = github_logo.get_rect().size
@@ -67,6 +69,8 @@ def main():
     icon_image = pygame.image.load(icon_path)
 
     pygame.display.set_icon(icon_image)
+
+    music.play(loops=-1)
 
     RestartGame()
     while run:
