@@ -25,9 +25,6 @@ jobs:
       run: |
         python Main.py
 
-        mkdir -p Assets
-        mv Assets/* Assets/
-
     - name: Archive artifacts
       uses: actions/upload-artifact@v2
       with:
