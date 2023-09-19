@@ -25,6 +25,7 @@ from time import sleep
 def main():
     global FPS, gravity, clock, dead, score, run, started, runs, obstacles, mananangal, mananangal_img
     global obstacle_img, win, roof_img, timer_font, indicator_font, bg_img, screen_width, screen_height 
+    global highscore
 
     pygame.init()
 
@@ -35,6 +36,7 @@ def main():
     run = True
     started = False
     runs = 0
+    highscore = 0
     obstacles = []
     screen_width, screen_height = 800, 600
     win = pygame.display.set_mode((screen_width, screen_height))
@@ -82,7 +84,7 @@ def AnimateRoof() :
     win.blit(roof_img, ((runs%111)*-7, 500))
 
 def RunGame():
-    global run, runs, started, restart_timer
+    global run, runs, started, restart_timer, score, highscore
     while run:
         pygame.time.delay(5)
         for event in pygame.event.get() :
@@ -99,7 +101,10 @@ def RunGame():
 
         win.blit(bg_img, (0, 0))
         if started != True :
-            DisplayIndicator("Press 'space bar' to start the game")
+            text_lines = ["Press 'space bar' to start the game",
+              "Press 'esc' to exit the game",
+              "High Score: " + str(highscore)]
+            DisplayIndicator(text_lines)
         if runs % 45 == 0 and started :
             ObstaclePair()
         for o in obstacles :
@@ -115,15 +120,20 @@ def RunGame():
             win.blit(scoreboard, (10, 0))
         pygame.display.update()
         clock.tick(FPS)
+        highscore = max(score, highscore)
         if dead:
             RestartGame()
         if not dead:
             runs += 1
 
-def DisplayIndicator(text):
-    text_surface = indicator_font.render(text, True, (255, 255, 255))
-    text_rect = text_surface.get_rect(center=(screen_width/2, (screen_height/2) + 50))
-    win.blit(text_surface, text_rect)
+def DisplayIndicator(text_lines):
+    y_offset = (screen_height // 2 - len(text_lines) * indicator_font.get_linesize() // 2) - 150
+    
+    for line in text_lines:
+        text_surface = indicator_font.render(line, True, (255, 255, 255))
+        text_rect = text_surface.get_rect(center=(screen_width/2, y_offset))
+        win.blit(text_surface, text_rect)
+        y_offset += indicator_font.get_linesize()
 
 def RestartGame():
     global dead, started, runs, score, obstacles, restart_timer
