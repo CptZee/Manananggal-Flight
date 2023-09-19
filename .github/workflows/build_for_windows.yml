@@ -19,7 +19,7 @@ jobs:
         python-version: 3.11
 
     - name: Install dependencies
-      run: pip install pygame pyinstaller
+      run: pip install pygame pyinstaller Pillow 
 
     - name: Compile Python script and move assets
       run: |
