@@ -206,7 +206,7 @@ class Obstacle() :
         global dead
         if self.dir == "DOWN" :
             if Manananggal.x + 48 > self.x and self.x + 75 > Manananggal.x :
-                if Mananangal.y + 2 < self.len :
+                if Manananggal.y + 2 < self.len :
                     dead = True
         else :
             if Manananggal.x + 48 > self.x and self.x + 75 > Manananggal.x :
